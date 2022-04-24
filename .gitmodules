@@ -1,0 +1,3 @@
+[submodule "dataset/lbpcascade_animeface"]
+	path = dataset/lbpcascade_animeface
+	url = https://github.com/nagadomi/lbpcascade_animeface.git
