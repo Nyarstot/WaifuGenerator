@@ -20,10 +20,21 @@ project "WaifuGenerator"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "waifupch.h"
+    pchsource "%{prj.name}/include/waifupch.cpp"
+
     files
     {
+        "%{prj.name}/include/**.cpp",
+        "%{prj.name}/include/**.cuh",
         "%{prj.name}/include/**.h",
-        "%{prj.name}/include/**.cpp"
+        "%{prj.name}/include/**.hh",
+        "%{prj.name}/include/**.cu"
+    }
+
+    includedirs
+    {
+        "%{prj.name}/include/"
     }
 
     -- Add necessary build customization using standard Premake5

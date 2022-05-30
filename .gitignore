@@ -347,6 +347,7 @@ MigrationBackup/
 ####### USER PROPERTIES ########
 
 # User-specific files
+
 *.rsuser
 *.suo
 *.user
@@ -355,6 +356,11 @@ MigrationBackup/
 *.sln.docstates
 *.vcxproj
 *.filters
+*.jpg
+
+gitcommit.txt
+dataset/AnimeFaceTrainingData.txt
+WaifuGenerator/NNOutput.txt
 
 # User-specific directories
 .vs/
