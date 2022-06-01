@@ -35,9 +35,6 @@ private:
     PixelRGB activationFunctionDerivative(PixelRGB value);
     PixelRGB sumDOW(const std::vector<Neuron>& nextLayer);
 
-    void updateWeightsIfEqual(std::vector<Neuron>& prevLayer);
-    void updateWeightsIfNotEqual(std::vector<Neuron>& prevLayer);
-
 public:
     Neuron(size_t outputAmount, size_t neuronIndex);
 
@@ -48,6 +45,15 @@ public:
 
     void setOutputValue(PixelRGB value) { m_OutputValue = std::move(value); }
     PixelRGB getOutputValue() const { return m_OutputValue; }
+
+    double getRedWeight()   const { return m_OutputWeights[m_NeuronIndex].m_RedWeight; }
+    double getGreenWeight() const { return m_OutputWeights[m_NeuronIndex].m_GreenWeight; }
+    double getBlueWeight()  const { return m_OutputWeights[m_NeuronIndex].m_RedWeight; }
+
+    double getDeltaRedWeight()  const { return m_OutputWeights[m_NeuronIndex].m_DeltaRedWeight; }
+    double getDeltaGreenWeight() const { return m_OutputWeights[m_NeuronIndex].m_DeltaGreenWeight; }
+    double getDeltaBlueWeight() const { return m_OutputWeights[m_NeuronIndex].m_DeltaBlueWeight; }
+
 };
 
 _WF_END

@@ -1,9 +1,14 @@
 #include "waifupch.h"
 #include "Network.h"
 
+#include <TinyXML/include/tinystr.h>
+#include <TinyXML/include/tinyxml.h>
+
 WaifuCPU::Network::Network(size_t inputSize, size_t encoderLayersCount, size_t latentSpaceNeuronAmount)
 {
     m_InputSize = inputSize;
+    m_EncoderLayersAmount = encoderLayersCount;
+    m_LatentLayerSize = latentSpaceNeuronAmount;
 
     m_RedChannelError   = 0.0f;
     m_GreenChannelError = 0.0f;
@@ -134,6 +139,61 @@ void _WF_CALL Network::backPropagate(const std::vector<PixelRGB>& targetValues)
 
 void _WF_CALL Network::saveConfiguration()
 {
+    TiXmlDocument configDocument;
+
+    TiXmlNode* root(configDocument.InsertEndChild(TiXmlElement("NetworkConfig")));
+    TiXmlElement generalData("GeneralData");
+    generalData.SetDoubleAttribute("InputSize", m_InputSize);
+    generalData.SetDoubleAttribute("EncoderLayers", m_EncoderLayersAmount);
+    generalData.SetDoubleAttribute("LatentVectorSize", m_LatentLayerSize);
+    root->InsertEndChild(generalData);
+
+    for (size_t i{}; i < m_HiddenLayers.size(); i++) {
+        TiXmlElement weightData("WeightData");
+        weightData.SetDoubleAttribute("LayerIndex", i);
+
+        for (size_t j{}; j < m_HiddenLayers[i].size(); j++) {
+            TiXmlElement weight("Weight");
+            weight.SetDoubleAttribute("Index", j);
+            weight.SetDoubleAttribute("RWeight", m_HiddenLayers[i][j].getRedWeight());
+            weight.SetDoubleAttribute("GWeight", m_HiddenLayers[i][j].getGreenWeight());
+            weight.SetDoubleAttribute("BWeight", m_HiddenLayers[i][j].getBlueWeight());
+            weightData.InsertEndChild(weight);
+        }
+
+        root->InsertEndChild(weightData);
+    }
+    configDocument.SaveFile("NetConfig.xml");
+}
+
+void _WF_CALL Network::readConfiguration(std::string path)
+{
+    TiXmlDocument configDocumetn;
+
+    if (configDocumetn.LoadFile(path)) {
+        TiXmlElement* root = configDocumetn.RootElement();
+        TiXmlElement* general = root->FirstChildElement();
+        TiXmlElement* weightsData = general->NextSiblingElement();
+
+        m_InputSize = std::stoi(general->Attribute("InputSize"));
+        m_EncoderLayersAmount = std::stoi(general->Attribute("EncoderLayers"));
+        m_LatentLayerSize = std::stoi(general->Attribute("LatentVectorSize"));
+
+        while (weightsData != NULL) {
+            TiXmlElement* currWeight = weightsData->FirstChildElement();
+            size_t layerIndex = std::stoi(weightsData->Attribute("LayerIndex"));
+
+            while (currWeight != NULL) {
+                std::cout << currWeight->Attribute("Index") << "\n";
+                currWeight = currWeight->NextSiblingElement();
+            }
+
+            weightsData = weightsData->NextSiblingElement();
+        }
+    }
+    else {
+        
+    }
 }
 
 void _WF_CALL Network::sendToOutput()

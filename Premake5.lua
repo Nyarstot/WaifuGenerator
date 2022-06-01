@@ -11,10 +11,10 @@ workspace "WaifuGenerator"
  
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
--- IncludeDir = {}
--- IncludeDir["TinyXML"] = "WaifuGenerator/thirdparty/tinyxml"
+IncludeDir = {}
+IncludeDir["TinyXML"] = "WaifuGenerator/thirdparty/TinyXML"
 
--- include "WaifuGenerator/thirdparty/tinyxml"
+include "WaifuGenerator/thirdparty/TinyXML"
 
 project "WaifuGenerator"
     location "WaifuGenerator"
@@ -39,8 +39,19 @@ project "WaifuGenerator"
 
     includedirs
     {
-        "%{prj.name}/include/"
-        --"%{IncludeDir.TinyXML}"
+        "%{prj.name}/include/",
+        
+        "%{IncludeDir.TinyXML}"
+    }
+
+    links
+    {
+        "TinyXML.lib"
+    }
+
+    libdirs
+    {
+        "%{prj.name}/lib"
     }
 
     -- Add necessary build customization using standard Premake5

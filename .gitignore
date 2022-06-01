@@ -359,6 +359,7 @@ MigrationBackup/
 *.jpg
 
 gitcommit.txt
+dataset/Launcher.py
 dataset/AnimeFaceTrainingData.txt
 WaifuGenerator/NNOutput.txt
 
@@ -369,3 +370,4 @@ int/
 dataset/raw
 dataset/clean
 dataset/waifu2x-caffe
+WaifuGenerator/Out

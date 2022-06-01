@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 
     size_t trainingPass = 0;
     size_t count = 0;
-    while (trainingPass != 492) 
+    while (trainingPass != 15)
     {
         trainingPass += 1;
         count += 1;
@@ -30,10 +30,10 @@ int main(int argc, char** argv)
         std::cout << "FEEDFORWARD #" << trainingPass << " DONE SUCCESSFULLY\n";
 
         resultValues = NeuralNetwork.getResult();
-        if (count == 100) {
+        /*if (count == 100) {
             networkTrainer.writeOutputToFile(resultValues, "Out/NNOutput.txt");
             count = 1;
-        }
+        }*/
         std::cout << "RESULT #" << trainingPass << " SUCCESSFULLY SAVED\n";
 
         NeuralNetwork.backPropagate(targetValues);
@@ -44,6 +44,7 @@ int main(int argc, char** argv)
         std::cout << "AVERAGE BLUE ERROR: " << NeuralNetwork.getAverageBlueChannelError() << "\n";
     }
 
+    NeuralNetwork.saveConfiguration();
     networkTrainer.writeOutputToFile(resultValues, "Out/NNOutput.txt");
 
     return 0;

@@ -1,3 +1,7 @@
 [submodule "dataset/lbpcascade_animeface"]
 	path = dataset/lbpcascade_animeface
 	url = https://github.com/nagadomi/lbpcascade_animeface.git
+[submodule "WaifuGenerator/thirdparty/TinyXML"]
+	path = WaifuGenerator/thirdparty/TinyXML
+	url = https://github.com/Nyarstot/tinyxml.git
+	branch = lib

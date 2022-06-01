@@ -16,6 +16,8 @@ private:
     std::vector<Layer> m_HiddenLayers;
 
     size_t m_InputSize;
+    size_t m_EncoderLayersAmount;
+    size_t m_LatentLayerSize;
 
     double m_RedChannelError;
     double m_GreenChannelError;
@@ -33,7 +35,9 @@ public:
 
     void feedForward(const std::vector<PixelRGB>& inputValues);
     void backPropagate(const std::vector<PixelRGB>& targetValues);
+
     void saveConfiguration();
+    void readConfiguration(std::string path);
 
     std::vector<PixelRGB> getResult()    const { return m_Output; }
     double getAverageRedChannelError()   const { return m_AverageRedChannelError; }
