@@ -21,6 +21,7 @@ import glob
 
 file = open('AnimeFaceTrainingData.txt', "a")
 
+fileCounter = 0
 for image in glob.glob('clean\clenSize64\*.jpg'):
     img = cv2.imread(image)
     height, width = img.shape[:2]
@@ -35,7 +36,8 @@ for image in glob.glob('clean\clenSize64\*.jpg'):
 
             file.write("[" + pixel_r + "," + pixel_g + "," + pixel_b + "]")
         file.write('\n')
-    print("Done with file: " + image)
+    fileCounter += 1
+    print("Done with file: " + image + "\t Total: " + str(fileCounter))
     file.write("<TRAIN_DATA_REGION_END>\n")
 
 file.close()

@@ -76,24 +76,6 @@ void _WF_CALL Neuron::feedForward(const std::vector<Neuron>& prevLayer)
         sumBlue = prevLayer[i].getOutputValue()[2] * prevLayer[i].m_OutputWeights[m_NeuronIndex].m_BlueWeight;
     }
 
-    /*if (prevLayer.size() == m_OutputWeights.size()) {
-        for (size_t i{}; i < prevLayer.size(); i++) {
-            sumRed   = prevLayer[i].getOutputValue()[0] * prevLayer[i].m_OutputWeights[i].m_RedWeight;
-            sumGreen = prevLayer[i].getOutputValue()[1] * prevLayer[i].m_OutputWeights[i].m_GreenWeight;
-            sumBlue  = prevLayer[i].getOutputValue()[2] * prevLayer[i].m_OutputWeights[i].m_BlueWeight;
-        }
-    }*/
-
-    /*if (prevLayer.size() != m_OutputWeights.size()) {
-        for (size_t i{}; i < m_OutputWeights.size(); i++) {
-            for (size_t j{}; j < prevLayer.size(); j++) {
-                sumRed   = prevLayer[j].getOutputValue()[0] * prevLayer[j].m_OutputWeights[j].m_RedWeight;
-                sumGreen = prevLayer[j].getOutputValue()[1] * prevLayer[j].m_OutputWeights[j].m_GreenWeight;
-                sumBlue  = prevLayer[j].getOutputValue()[2] * prevLayer[j].m_OutputWeights[j].m_BlueWeight;
-            }
-        }
-    }*/
-
     m_OutputValue = this->activationFunction(PixelRGB(sumRed, sumGreen, sumBlue));
 }
 

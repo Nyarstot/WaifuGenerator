@@ -72,8 +72,6 @@ void _WF_CALL Network::feedForward(const std::vector<PixelRGB>& inputValues)
         }
         std::cout << "debug: " << prevLayer.size() << "\n";
     }
-
-    //this->sendToOutput();
 }
 
 void _WF_CALL Network::backPropagate(const std::vector<PixelRGB>& targetValues)
@@ -136,18 +134,12 @@ void _WF_CALL Network::backPropagate(const std::vector<PixelRGB>& targetValues)
 
 void _WF_CALL Network::saveConfiguration()
 {
-    /*std::string name = "config.txt";
-    std::ofstream conFile(name);
-
-    for (size_t i{}; i < m_HiddenLayers.size(); i++) {
-        for (size_t j{}; j < m_HiddenLayers[i].size(); j++) {
-            conFile << "m_RedWeight: " << m_HiddenLayers[i][j].
-        }
-    }*/
 }
 
 void _WF_CALL Network::sendToOutput()
 {
+    m_Output.clear();
+
     Layer& out = m_HiddenLayers.back();
     for (size_t i{}; i < out.size() - 1; i++) {
         m_Output.push_back(out[i].getOutputValue());

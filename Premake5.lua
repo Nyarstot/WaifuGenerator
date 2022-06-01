@@ -11,6 +11,11 @@ workspace "WaifuGenerator"
  
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- IncludeDir = {}
+-- IncludeDir["TinyXML"] = "WaifuGenerator/thirdparty/tinyxml"
+
+-- include "WaifuGenerator/thirdparty/tinyxml"
+
 project "WaifuGenerator"
     location "WaifuGenerator"
     kind "ConsoleApp"
@@ -35,6 +40,7 @@ project "WaifuGenerator"
     includedirs
     {
         "%{prj.name}/include/"
+        --"%{IncludeDir.TinyXML}"
     }
 
     -- Add necessary build customization using standard Premake5
